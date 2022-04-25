@@ -1,0 +1,17 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "files.exclude": {
+        "**/*.pyc": { "when": "$(basename).py" },
+        "**/__pycache__": true,
+        "**/*.pytest_cache": true
+    },
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:SqlAlchemy-OAO}/test.db",
+            "name": "test"
+        }
+    ],
+}

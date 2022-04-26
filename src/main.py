@@ -1,10 +1,5 @@
-# pylint: disable=import-outside-toplevel, unused-import
+# pylint: disable=import-outside-toplevel, unused-import, no-value-for-parameter
 """ Aplication Factory """
-
-
-
-from time import process_time_ns
-
 
 def init_app():
     """
@@ -35,18 +30,20 @@ def init_app():
 
     # Criando um Exemplo
     print("\n Criando exemplo \n")
-    ExempleQuerys.new(name="marianoTupa")
+    ExempleQuerys.new("marianoTupa")
 
     # Mostrando todos os exemplos
     print(" Todos os exemplos!")
     exemplos = ExempleQuerys.get_all()
     print(exemplos)
 
-    # Deletando Exemplo
+    # # Deletando Exemplo
     print("\n deletando exemplo!")
     ExempleQuerys.delete(1)
 
-    # Mostrando todos os exemplos
+    # # Mostrando todos os exemplos
     print("\n Todos os exemplos:")
     exemplos = ExempleQuerys.get_all()
     print(exemplos)
+    
+    ExempleQuerys.novo()

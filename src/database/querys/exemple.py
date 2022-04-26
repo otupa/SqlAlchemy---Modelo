@@ -1,77 +1,64 @@
-# pylint: disable=consider-using-f-string
-# pylint: disable=bare-except
-# pylint: disable=too-few-public-methods
-# pylint: disable=too-few-public-methods
-# pylint: disable=singleton-comparison
+# : disable=consider-using-f-string
+# : disable=bare-except
+# : disable=too-few-public-methods
+# : disable=too-few-public-methods
+# pylint: disable=singleton-comparison, no-member, unused-argument, bad-classmethod-argument
 """ User Querys"""
 
 from typing import List
-from src.database.db_connection import DBConnectionHendler
 from src.database.models import Exemple
+from src.database import db_connector
 
 
 class ExempleQuerys:
     """Aqui estão as consultas no banco de dados e CRUDs"""
 
     @classmethod
-    def get_all(cls) -> List:
-        """Retorna todos os exempls na base de dados"""
-        with DBConnectionHendler() as db_connection:
-            try:
-                return db_connection.session.query(Exemple).all()
-            except:
-                db_connection.session.rollback()
-                raise
-            finally:
-                db_connection.session.close()
+    @db_connector
+    def get_all(connection, arg1, arg2=None) -> List:
+        """Pega todos os exemplos na tabela"""
+        query = connection.session.query(Exemple).all()
+        return query
 
 
     @classmethod
-    def new(cls, name):
+    @db_connector
+    def new(connection, arg1, arg2=None):
         """Cria um novo exemplo"""
-        with DBConnectionHendler() as db_connection:
-            try:
-                check_name = (
-                    db_connection.session.query(Exemple).filter_by(name=name).first()
-                )
-                if check_name == None:
-                    new_user = Exemple(name=name)
-                    db_connection.session.add(new_user)
-                    db_connection.session.commit()
-            except:
-                db_connection.session.rollback()
-                raise
-            finally:
-                db_connection.session.close()
+        print(arg2)
+
+        check_name = (
+            connection.session.query(Exemple).filter_by(name=arg2).first()
+        )
+        if check_name == None:
+            new_user = Exemple(name=arg2)
+            connection.session.add(new_user)
+            connection.session.commit()
+
 
     @classmethod
-    def get_id(cls, _id):
+    @db_connector
+    def get_id(connection, arg1, arg2=None):
         """Pesquisa um exemplo pelo id"""
-        with DBConnectionHendler() as db_connection:
-            try:
-                return (
-                    db_connection.session.query(Exemple).filter_by(id=_id).first()
-                )
-            except:
-                db_connection.session.rollback()
-                raise
-            finally:
-                db_connection.session.close()
+        return connection.session.query(Exemple).filter_by(id=arg2).first()
+
 
     @classmethod
-    def delete(cls, exemple_id):
+    @db_connector
+    def delete(connection, arg1, arg2=None):
         """Deleta umm exemplo"""
-        with DBConnectionHendler() as db_connection:
-            try:
-                exemple = (
-                    db_connection.session.query(Exemple)
-                    .filter_by(id=exemple_id)
-                    .first()
-                )
-                db_connection.session.delete(exemple)
-                db_connection.session.commit()
-            except:
-                db_connection.session.rollback()
-                raise
-            finally:
-                db_connection.session.close()
+        exemple = (
+            connection.session.query(Exemple)
+            .filter_by(id=arg2)
+            .first()
+        )
+        connection.session.delete(exemple)
+        connection.session.commit()
+        
+    
+    @classmethod
+    @db_connector
+    def nova(connection, arg1, arg2=None):
+        """Deleta umm exemplo"""
+        query = connection.session.query(Exemple).all()
+        return query

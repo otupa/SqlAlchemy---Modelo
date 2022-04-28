@@ -1,6 +1,5 @@
 # pylint: disable=import-outside-toplevel, unused-import, no-value-for-parameter
-"""Aplication Factory"""
-
+""" Aplication Factory """
 
 def init_app():
     """
@@ -30,19 +29,19 @@ def init_app():
     from .database.querys import Querys
 
     # Criando um Exemplo
-    print('\n Criando exemplo \n')
-    Querys.create('marianoTupa')
+    print("\n Criando exemplo \n")
+    Querys.create("marianoTupa")
 
     # Mostrando todos os exemplos
-    print(' Todos os exemplos!')
+    print(" Todos os exemplos!")
     exemplos = Querys.get_all()
     print(exemplos)
 
     # Deletando Exemplo
-    print('\n deletando exemplo!')
+    print("\n deletando exemplo!")
     Querys.delete(1)
 
     # # Mostrando todos os exemplos
-    print('\n Todos os exemplos:')
+    print("\n Todos os exemplos:")
     exemplos = Querys.get_all()
     print(exemplos)

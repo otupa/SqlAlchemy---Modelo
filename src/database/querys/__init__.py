@@ -1,1 +1,1 @@
-from .exemple import ExempleQuerys
+from .exemple import Querys

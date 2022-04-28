@@ -1,5 +1,6 @@
 # pylint: disable=import-outside-toplevel, unused-import, no-value-for-parameter
-""" Aplication Factory """
+"""Aplication Factory"""
+
 
 def init_app():
     """
@@ -26,24 +27,22 @@ def init_app():
     Base.metadata.create_all(engine)
 
     # Exemplo de uso
-    from .database.querys import ExempleQuerys
+    from .database.querys import Querys
 
     # Criando um Exemplo
-    print("\n Criando exemplo \n")
-    ExempleQuerys.new("marianoTupa")
+    print('\n Criando exemplo \n')
+    Querys.create('marianoTupa')
 
     # Mostrando todos os exemplos
-    print(" Todos os exemplos!")
-    exemplos = ExempleQuerys.get_all()
+    print(' Todos os exemplos!')
+    exemplos = Querys.get_all()
     print(exemplos)
 
-    # # Deletando Exemplo
-    print("\n deletando exemplo!")
-    ExempleQuerys.delete(1)
+    # Deletando Exemplo
+    print('\n deletando exemplo!')
+    Querys.delete(1)
 
     # # Mostrando todos os exemplos
-    print("\n Todos os exemplos:")
-    exemplos = ExempleQuerys.get_all()
+    print('\n Todos os exemplos:')
+    exemplos = Querys.get_all()
     print(exemplos)
-    
-    ExempleQuerys.novo()
